@@ -16,7 +16,7 @@ class State:
 
 @route
 def index(state: State) -> Page:
-    return Page(state, ["Hello World!"])
+    return Page(state, ["bye World!"])
 
 assert_equal(index(State()), Page(State(), ["Hello World!"]))
 
