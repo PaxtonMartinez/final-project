@@ -300,6 +300,8 @@ returns: the total score for that dive
     judges_scores = get_judges_score(scores)
     return round(dive.DD * judges_scores, 2)
 
+"""this unit test was not possible without global constants. it does work, but not when the
+constants are in docstrings
 
 assert_equal(
     score_dive(d107C, [4.0, 4.5, 4.5, 5, 5, 3.5, 4.5]), 37.8)
@@ -310,27 +312,9 @@ assert_equal(
 assert_equal(
     score_dive(d5156B, [6.0, 5, 5.5, 5, 4.5]), 58.9)
 
-
-
-
-
 """
-def get_dive_order(entries:list[Diver])->list[Diver]:
 
-    This function rearanges a list of entries and puts them into a list in the
-order that each diver will go
 
-paramaters: entries:list[Diver]  (a list of divers in the order they signed up)
-
-returns: list[diver] ( a list of divers in a random order, which is the order they will compete)
-
-    ordered_list = random.shuffle(entries)
-    return ordered_list
-
-assert_equal(
-    get_dive_order([diver_1, diver_2, diver_3]),[diver_2, diver_1, diver_3])
-
-"""
 
                                  
 def run_round(entries:list[Diver], round_num:int,event_scores:list[list[float]])->list[Diver]:
@@ -342,7 +326,7 @@ in the order of diving)
 
 returns: returns a list of divers in the order of highes to lowest score
 """
-  diver_scores = []
+    diver_scores = []
 
     
     for i in range(len(entries)):
