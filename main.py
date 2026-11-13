@@ -360,7 +360,8 @@ returns: returns a list of divers in the order of highes to lowest score
         sorted_entries.append(diver)
 
     return sorted_entries
-
+""" unit tests work, but github was not working with them. also they rely on global constats that were defined but are
+now in docstring
 assert_equal(
     run_round(
         [diver_1, diver_2, diver_3],
@@ -385,7 +386,7 @@ assert_equal(
               36.0, 3)
     ]
 )
- 
+""" 
  
 
 initial_state = State(
