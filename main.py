@@ -40,9 +40,71 @@ def index(state: State):
         state,
         [
             "Dive Meet Simulator",
-            Button("Start Meet", start_meet)
+            Button("Add Divers", add_diver_page)
         ]
     )
+
+
+@route
+def add_diver_page(state: State):
+    
+    """this page allows the user to enter divers for the meet"""
+    
+    return Page(state, [
+        Header("Add a Diver"),
+
+        "Diver Name:",
+        TextBox("name"),
+
+        "Year:",
+        TextBox("year"),
+
+        "Dive 1 Name:",
+        TextBox("dive1_name"),
+        "Dive 1 Number:",
+        TextBox("dive1_number"),
+        "Dive 1 Position:",
+        TextBox("dive1_position"),
+        "Dive 1 DD:",
+        TextBox("dive1_DD"),
+
+        "Dive 2 Name:",
+        TextBox("dive2_name"),
+        "Dive 2 Number:",
+        TextBox("dive2_number"),
+        "Dive 2 Position:",
+        TextBox("dive2_position"),
+        "Dive 2 DD:",
+        TextBox("dive2_DD"),
+
+        
+
+        Button("Add Diver", add_diver)
+    ])
+
+
+
+@route
+def add_diver(state: State, name: str, year: str,
+              dive1_name: str, dive1_number: int, dive1_position: str, dive1_DD: float,
+              dive2_name: str, dive2_number: int, dive2_position: str, dive2_DD: float):
+    
+    """this is allows the user to enter more than one diver"""
+
+    dive_list = [
+    Dive(dive1_name, dive1_number, dive1_position, dive1_DD),
+    Dive(dive2_name, dive2_number, dive2_position, dive2_DD)]
+    
+    new_diver = Diver(name, year, dive_list, 0.0, 0)
+
+    
+    state.entries.append(new_diver)
+
+    return Page(state, [
+        "Diver added successfully!",
+        Button("Add Another Diver", add_diver_page),
+        Button("Start Meet", start_meet)
+    ])
 
 
 @route
@@ -101,11 +163,11 @@ def save_scores(state: State,
         return score_page(state)
 
     
-    run_round(
-        state.entries,
-        state.round_num,
-        state.event_scores
-    )
+    state.entries = run_round(
+    state.entries,
+    state.round_num,
+    state.event_scores)
+
 
     
     state.round_num += 1
@@ -390,18 +452,10 @@ assert_equal(
  
 
 initial_state = State(
-    [
-        diver_1,
-        diver_2,
-        diver_3,
-        diver_4,
-        diver_5,
-        diver_6,
-        diver_7
-    ],
-    0,      
-    0,      
-    []      
+    [],
+    0,
+    0,
+    []
 )
  
  
